@@ -1,0 +1,102 @@
+<?php
+class Codeblocks {
+	public $filter_cache, $filter_data;
+	
+	public function __construct() {
+		if (!class_exists('acf')) {
+			define('ACF_LITE', true);
+			include 'acf/acf.php';
+		}
+		include 'code-field/acf-field.php';
+		include 'acf-group.php';
+		
+		add_action('init', array($this, 'init'));
+		add_action('wp_enqueue_scripts', array($this, 'scripts'), 11, 1);
+		add_shortcode('codeblocks', array($this, 'shortcode'));
+		add_shortcode('codeblock', array($this, 'shortcode'));
+
+		$this->filter_cache = array(
+			'name' => '',
+			'iteration' => 0
+		);
+	}
+	public function init() {
+		
+		//
+	}
+	function scripts() {
+		global $wp_query;
+		
+		rewind_posts();
+		
+		if (have_posts()) {
+			$languages = array();
+			$theme = 'codeblocks';
+			
+			while (have_posts()) {
+				the_post();
+				$data = get_field('code_blocks');
+				if (!empty($data)) {
+					foreach ($data as $chunk) {
+						if ($chunk['language'] != 'none') {
+							$languages[] = $chunk['language'];
+						}
+					}
+				}
+			}
+			
+			if (count($languages) > 0) {
+				$theme_url = plugins_url('css/rainbow/' . $theme . '.css', CODEBLOCKS);
+				$theme_url = apply_filters('codeblocks/rainbow_theme', $theme_url);
+				if (!is_null($theme_url)) {
+					if (is_string($theme_url)) {
+						wp_enqueue_style('rainbow-' . $theme, $theme_url);
+					}
+					wp_enqueue_script('rainbow', plugins_url('js/rainbow.js', CODEBLOCKS));
+				}
+			}
+			
+			wp_reset_query();
+		}
+	}
+	public function shortcode($options) {
+		if (is_array($options) && array_key_exists('name', $options)) {
+			$this->filter_cache['name'] = $options['name'];
+		} else {
+			$this->filter_cache['name'] = null;
+		}
+
+		if (is_null($this->filter_cache['name'])) {
+			$this->filter_cache['name'] = 'codeblock_' . $this->filter_cache['iteration'];
+		}
+
+		$this->filter_data = get_field('code_blocks');
+		$field = array_reduce($this->filter_data, function($o, $e) {
+			global $codeblocks;
+			if (strlen($e['title']) == 0) {
+				// No title, use 'codeblock_0', 'codeblock_1', ...
+				$index = array_search($e, $codeblocks->filter_data);
+				$e['title'] = 'codeblock_' . $index;
+			}
+			return $e['title'] == $codeblocks->filter_cache['name'] ? $e : $o;
+		});
+		
+		if ($field) {
+
+			// If they don't use the `name='MY_BLOCK'`, get code blocks in order
+			$this->filter_cache['iteration']++;
+
+			return '<pre id="codeblock_' . $field['title'] .
+						'" class="codeblock codeblock_' . $field['language'] . '"><code' . (
+							(is_array($options) && array_key_exists('highlight', $options) && $options['highlight'] == '0') || $field['language'] == 'none' ?
+								'' :
+								' data-language="'
+									. (is_array($options) && array_key_exists('highlight', $options) ? $options['highlight'] : $field['language']) . '"')
+								. '>'
+
+							. htmlentities($field['code'])
+					.'</code></pre>';
+		}
+	}
+}
+?>

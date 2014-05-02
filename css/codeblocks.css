@@ -1,0 +1,35 @@
+.codeblocks .code_block {
+	border: 1px solid #DDD;
+	padding: 20px;
+	margin: 12px 0;
+}
+.codeblocks .code_block .remove_block {
+	color: #A00;
+	text-decoration: none;
+	margin-top: -10px;
+	float: right;
+	font-size: 11px;
+}
+.codeblocks .code_block .remove_block:hover {
+	color: #F00;
+}
+.codeblocks .code_block label {
+	display: block;
+	font-weight: bold;
+	margin-bottom: 6px;
+}
+.codeblocks .code_block input, .codeblocks .code_block select {
+	display: block;
+	margin-bottom: 12px !important;
+}
+.codeblocks .code_block .CodeMirror {
+	cursor: text;
+}
+.codeblocks .code_block.add_block {
+	cursor: pointer;
+	text-align: center;
+}
+.codeblocks .code_block.add_block h1 {
+	font-size: 14px;
+	color: #666;
+}
