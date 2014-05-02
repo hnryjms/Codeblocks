@@ -1,7 +1,7 @@
 Codeblocks
 ==========
 
-# Add formatted code blocks into your Wordpress blog posts.
+### Add formatted code blocks into your Wordpress blog posts.
 
 Codeblocks lets you add highlighted and formatted code into your Wordpress website without cluttering the visual editor. Write your code in individual blocks below the built-in Content editor, and access these blocks simply by adding `[codeblock name='MY_BLOCK']` into your blog post or page. Codeblocks will even highlight the code on your website, and themes can customize the color scheme of your code.
 
