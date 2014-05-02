@@ -2,27 +2,32 @@
 class Codeblocks {
 	public $filter_cache, $filter_data;
 	
-	public function __construct() {
-		if (!class_exists('acf')) {
-			define('ACF_LITE', true);
-			include 'acf/acf.php';
-		}
-		include 'code-field/acf-field.php';
-		include 'acf-group.php';
-		
-		add_action('init', array($this, 'init'));
-		add_action('wp_enqueue_scripts', array($this, 'scripts'), 11, 1);
-		add_shortcode('codeblocks', array($this, 'shortcode'));
-		add_shortcode('codeblock', array($this, 'shortcode'));
+	public function __construct() {		
+		add_action('loaded', array($this, 'loaded'));
+		add_action('admin_notices', array($this, 'notices'));
 
 		$this->filter_cache = array(
 			'name' => '',
 			'iteration' => 0
 		);
 	}
-	public function init() {
-		
-		//
+	public function loaded() {
+		if (class_exists('acf')) {
+			include 'code-field/acf-field.php';
+			include 'acf-group.php';
+			
+			add_action('wp_enqueue_scripts', array($this, 'scripts'), 11, 1);
+			add_shortcode('codeblocks', array($this, 'shortcode'));
+			add_shortcode('codeblock', array($this, 'shortcode'));
+		}
+	}
+	public function notices()
+	{
+		if (!class_exists('acf')) {
+			?><div class="error">
+	        <p><?php printf(__( 'Codeblocks requires the Advanced Custom Fields plugin. To use Codeblocks, please <a href="%s">install the ACF plugin</a> by Elliot Condon.', CODEBLOCK_LANG), admin_url('plugin-install.php?tab=search&s=advanced+custom+fields&plugin-search-input=Search+Plugins')); ?></p>
+	    </div><?php
+		}
 	}
 	function scripts() {
 		global $wp_query;
