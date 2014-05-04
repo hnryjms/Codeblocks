@@ -59,7 +59,11 @@ add_filter('codeblocks/rainbow_theme', function($oldURL) {
 Changelog
 ---------
 
-1.0.1 (current)
+1.1.0 (current)
+
+* Merged ACF Plugin dependency with Codeblocks
+
+1.0.1
 
 * Fixed an issue with CodeMirror dependencies
 * Fixed an issue with PHP Language highlighting
