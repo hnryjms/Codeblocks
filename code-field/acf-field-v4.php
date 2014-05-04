@@ -58,7 +58,7 @@ class acf_field_Codeblocks extends acf_field
 	}
 	function input_admin_enqueue_scripts() {
 		wp_enqueue_script('codeblocks_mirror', plugins_url('js/codemirror.js', CODEBLOCKS));
-		wp_enqueue_script('codeblocks_mirror_autoload', plugins_url('js/codemirror.autoload.js', CODEBLOCKS));
+		wp_enqueue_script('codeblocks_mirror_autoload', plugins_url('js/codemirror.autoload.js', CODEBLOCKS), array('codeblocks_mirror'));
 		$languages = array(
 			'none' => '-- Do not highlight code --',
 			'c' => 'C',
@@ -80,7 +80,7 @@ class acf_field_Codeblocks extends acf_field
 			'shell' => 'Shell',
 			'smalltalk' => 'SmallTalk'
 		);
-		wp_register_script('codeblocks_actions', plugins_url('js/codeblocks.js', CODEBLOCKS), array('jquery', 'codeblocks_mirror', 'codeblocks_mirror_autoload'));
+		wp_register_script('codeblocks_actions', plugins_url('js/codeblocks.js', CODEBLOCKS), array('jquery', 'codeblocks_mirror_autoload'));
 		wp_localize_script('codeblocks_actions', 'codemirror_languages', $languages);
 		wp_localize_script('codeblocks_actions', 'codemirror_url', plugins_url('js/codemirror_langs', CODEBLOCKS));
 		wp_enqueue_script('codeblocks_actions');
