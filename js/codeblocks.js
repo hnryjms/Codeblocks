@@ -86,6 +86,9 @@ jQuery(function($){
 			} else {
 				editor.setOption('mode', language);
 				CodeMirror.autoLoadMode(editor, language);
+				if (language == 'php') {
+					editor.setOption('mode', 'text/x-php');
+				}
 			}
 		});
 		$(".remove_block", element).click(function(){
