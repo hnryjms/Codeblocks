@@ -4,7 +4,7 @@ Donate link: http://z43studio.com/
 Tags: code, development, blocks, post, syntax, highlighting, productivity, editor
 Requires at least: 3.0
 Tested up to: 3.9
-Stable tag: 1.0
+Stable tag: 1.0.1
 
 Add formatted code blocks into your blog posts.
 
@@ -59,6 +59,11 @@ If your theme's base stylesheet file already includes the Rainbow.js styles, jus
 
 == Changelog ==
 
-= 1.0 (current) =
+= 1.0.1 (current) =
+
+* Fixed an issue with CodeMirror dependencies
+* Fixed an issue with PHP Language highlighting
+
+= 1.0 =
 
 * Released. And awesome.
