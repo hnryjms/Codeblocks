@@ -2,16 +2,8 @@
 class Codeblocks {
 	public $filter_cache, $filter_data;
 	
-	public function __construct() {
-		if (!class_exists('acf')) {
-			define('ACF_LITE', true);
-			include 'acf/acf.php';
-		}
-		include 'code-field/acf-field.php';
-		include 'acf-group.php';
-		
-		add_action('init', array($this, 'init'));
-		add_action('wp_enqueue_scripts', array($this, 'scripts'), 11, 1);
+	public function __construct() {		
+		add_action('plugins_loaded', array($this, 'loaded'));
 		add_shortcode('codeblocks', array($this, 'shortcode'));
 		add_shortcode('codeblock', array($this, 'shortcode'));
 
@@ -20,9 +12,15 @@ class Codeblocks {
 			'iteration' => 0
 		);
 	}
-	public function init() {
-		
-		//
+	public function loaded() {
+		if (!class_exists('acf')) {
+			define('ACF_LITE', true);
+			include 'acf/acf.php';
+		}
+		include 'code-field/acf-field.php';
+		include 'acf-group.php';
+
+		add_action('wp_enqueue_scripts', array($this, 'scripts'), 11, 1);
 	}
 	function scripts() {
 		global $wp_query;

@@ -1,15 +1,4 @@
 <?php
-/*
-Plugin Name: Advanced Custom Fields
-Plugin URI: http://www.advancedcustomfields.com/
-Description: Fully customise WordPress edit screens with powerful fields. Boasting a professional interface and a powerful API, it’s a must have for any web developer working with WordPress. Field types include: Wysiwyg, text, textarea, image, file, select, checkbox, page link, post object, date picker, color picker, repeater, flexible content, gallery and more!
-Version: 4.3.7
-Author: Elliot Condon
-Author URI: http://www.elliotcondon.com/
-License: GPL
-Copyright: Elliot Condon
-*/
-
 if( !class_exists('acf') ):
 
 class acf
@@ -351,7 +340,6 @@ class acf
 		include_once('core/controllers/location.php');
 		include_once('core/controllers/field_group.php');
 		
-		
 		// admin only includes
 		if( is_admin() )
 		{
@@ -360,7 +348,6 @@ class acf
 			include_once('core/controllers/everything_fields.php');	
 			include_once('core/controllers/field_groups.php');
 		}
-		
 		
 		// register fields
 		include_once('core/fields/_functions.php');
@@ -450,16 +437,6 @@ class acf
 			return;
 		}
 		
-		
-		// admin only includes
-		if( is_admin() )
-		{
-			include_once('core/controllers/export.php');
-			include_once('core/controllers/addons.php');
-			include_once('core/controllers/third_party.php');
-			include_once('core/controllers/upgrade.php');
-		}
-		
 	}
 	
 	
@@ -546,22 +523,6 @@ class acf
 		foreach( $styles as $k => $v )
 		{
 			wp_register_style( $k, $v, false, $this->settings['version'] ); 
-		}
-		
-		
-		// bail early if user has defined LITE_MODE as true
-		if( defined('ACF_LITE') && ACF_LITE )
-		{
-			return;
-		}
-		
-		
-		// admin only
-		if( is_admin() )
-		{
-			add_action('admin_menu', array($this,'admin_menu'));
-			add_action('admin_head', array($this,'admin_head'));
-			add_filter('post_updated_messages', array($this, 'post_updated_messages'));
 		}
 	}
 	
