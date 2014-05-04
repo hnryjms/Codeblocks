@@ -80,7 +80,7 @@ class acf_field_Codeblocks extends acf_field
 			'shell' => 'Shell',
 			'smalltalk' => 'SmallTalk'
 		);
-		wp_register_script('codeblocks_actions', plugins_url('js/codeblocks.js', CODEBLOCKS), array('jquery', 'codeblocks_mirror_autoload'));
+		wp_register_script('codeblocks_actions', plugins_url('js/codeblocks.js', CODEBLOCKS), array('jquery', 'codeblocks_mirror'));
 		wp_localize_script('codeblocks_actions', 'codemirror_languages', $languages);
 		wp_localize_script('codeblocks_actions', 'codemirror_url', plugins_url('js/codemirror_langs', CODEBLOCKS));
 		wp_enqueue_script('codeblocks_actions');
