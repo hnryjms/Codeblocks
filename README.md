@@ -59,7 +59,11 @@ add_filter('codeblocks/rainbow_theme', function($oldURL) {
 Changelog
 ---------
 
-1.1.0 (current)
+1.1.0.1
+
+* Updated to WordPress 4.1 Support
+
+1.1.0
 
 * Merged ACF Plugin dependency with Codeblocks
 

@@ -2,17 +2,17 @@
 Contributors: z43 Studio
 Donate link: http://z43studio.com/
 Tags: code, development, blocks, post, syntax, highlighting, productivity, editor
-Requires at least: 3.0
-Tested up to: 3.9
-Stable tag: 1.0.1
+Requires at least: 3.6
+Tested up to: 4.1
+Stable tag: 1.1.0.1
 
-Add formatted code blocks into your blog posts.
+Add formatted source code blocks into your blog posts.
 
 == Description ==
 
-Codeblocks lets you add highlighted and formatted code into your website without cluttering the visual editor. Write your code in individual blocks below the built-in Content editor, and access these blocks simply by adding `[codeblock name='MY_BLOCK']` into your blog post or page. Codeblocks will even highlight the code on your website, and themes can customize the color scheme of your code.
+Codeblocks lets you add highlighted and formatted source code into your website without cluttering the visual editor. Write your code in individual blocks outside the built-in Content editor, and access these blocks simply by adding `[codeblock name='MY_BLOCK']` into your blog post or page. Codeblocks highlights the code on your website using [Rainbow.js](http://craig.is/making/rainbows), and themes can customize the color scheme of your code.
 
-With Codeblocks, you can write your code with a rich CodeMirror editor that highlights your code as you type, and showing that code on your website is easy using the `[codeblocks]` shortcode.
+<http://z43studio.com/2014/05/codeblocks/>
 
 **Theme editors:** See the Installation section for information on how to adjust Codeblocks options in your theme.
 
@@ -57,9 +57,17 @@ If your theme's base stylesheet file already includes the Rainbow.js styles, jus
 		return true;
 	});
 
+== Screenshots ==
+
+1. Codeblocks adds source code editors below your main post body.
+
 == Changelog ==
 
-= 1.1.0 (current) =
+= 1.1.0.1 (current) =
+
+* Updated to WordPress 4.1 Support
+
+= 1.1.0 =
 
 * Merged ACF Plugin dependency with Codeblocks
 
